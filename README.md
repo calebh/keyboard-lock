@@ -27,6 +27,8 @@ fullscreen and `navigator.keyboard.unlock()` when it leaves.
 
 ## API
 
+The following API is only relevant if you don't want the keyboard to become automatically locked when the user enters fullscreen.
+
 Everything is on the static class `WebKeyboardLock.KeyboardLock`.
 
 | Member | |
