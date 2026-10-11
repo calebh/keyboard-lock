@@ -1,0 +1,19 @@
+{
+  "name": "software.extensional.keyboardlock",
+  "version": "0.1.0",
+  "displayName": "Keyboard Lock",
+  "description": "Locks the keyboard while a WebGL game is fullscreen, using the browser Keyboard Lock API, so shortcuts such as Ctrl+W reach the game instead of closing the tab.",
+  "unity": "2021.3",
+  "keywords": [
+    "webgl",
+    "keyboard",
+    "keyboard lock",
+    "fullscreen",
+    "input"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Caleb Helbling (Extensional Software)",
+    "url": "https://www.extensional.software/"
+  }
+}
