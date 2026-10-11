@@ -2,9 +2,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AOT;
 using UnityEngine;
+using UnityEngine.Scripting;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
+
+// Nothing in a game has to reference this assembly, and the managed code
+// stripper drops an unreferenced assembly without ever looking inside it for
+// [RuntimeInitializeOnLoadMethod]. This makes it look.
+[assembly: AlwaysLinkAssembly]
 
 namespace WebKeyboardLock
 {
@@ -98,8 +104,12 @@ namespace WebKeyboardLock
         /// <summary>Releases the lock, and abandons one that is still being requested.</summary>
         public static void Unlock() => KeyboardLock_Unlock();
 
-        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static void Initialize() => KeyboardLock_SetLockWhileFullscreen(lockWhileFullscreen ? 1 : 0);
+        /// <summary>
+        /// Starts following fullscreen changes. Unity calls this at startup;
+        /// calling it again does no harm.
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Initialize() => KeyboardLock_SetLockWhileFullscreen(lockWhileFullscreen ? 1 : 0);
 
         [MonoPInvokeCallback(typeof(LockCallback))]
         static void OnLockSettled(int requestId, int locked)

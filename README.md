@@ -5,7 +5,17 @@ such as the browser closing the tab when Ctrl+W is pressed (a common occurance i
 the Escape key from closing fullscreen.
 
 In your in-game menu you may want to consider a "Quit" button of some sort that will run `Screen.fullScreen = false;` since
-with the keyboard lock the user has to **hold** the escape button exit fullscreen.
+with the keyboard lock the user has to **hold** the escape button exit fullscreen. In my game my quit button code looks like this:
+
+```
+private void QuitButton_clicked() {
+#if UNITY_WEBGL && !UNITY_EDITOR
+    Screen.fullScreen = false; // the plugin unlocks the keyboard when fullscreen ends
+#else
+    Application.Quit();
+#endif
+}
+```
 
 ## Install
 
